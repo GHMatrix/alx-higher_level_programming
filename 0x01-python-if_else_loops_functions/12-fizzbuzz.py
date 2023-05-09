@@ -1,14 +1,12 @@
 #!/usr/bin/python3
 
-def fizzbuzz(n):
-    if n % 3 == 0 and n % 5 == 0:
-        return "FizzBuzz"
-    elif n % 3 == 0:
-        return "Fizz"
-    elif n % 5 == 0:
-        return "Buzz"
-    else:
-        return str(n)
-
-for number in range(1, 101):
-    print(fizzbuzz(number), end=" ")
+def fizzbuzz():
+    for num in range(1, 101):
+        if num % 3 == 0 and num % 5 == 0:
+            print("FizzBuzz ", end="")
+        elif num % 3 == 0:
+            print("Fizz ", end="")
+        elif num % 5 == 0:
+            print("Buzz ", end="")
+        else:
+            print(f"{num} ", end="")
