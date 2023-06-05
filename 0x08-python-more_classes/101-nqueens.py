@@ -3,25 +3,31 @@
 Solving the N-queens puzzle.
 """
 
+
 import sys
 
 
 def is_safe(board, row, col):
     """
     Check if it's safe to place a queen at the given position on the board.
+
+    Args:
+        board (list): The current state of the chessboard.
+        row (int): The row index of the position to check.
+        col (int): The column index of the position to check.
+
+    Returns:
+        bool: True if it's safe to place a queen, False otherwise.
     """
-    # Check the current row on the left side
     for i in range(col):
         if board[row][i] == 1:
             return False
 
-    # Check the upper diagonal on the left side
     for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
         if board[i][j] == 1:
             return False
 
-    # Check the lower diagonal on the left side
-    for i, j in zip(range(row, board_size), range(col, -1, -1)):
+    for i, j in zip(range(row, len(board)), range(col, -1, -1)):
         if board[i][j] == 1:
             return False
 
@@ -31,12 +37,19 @@ def is_safe(board, row, col):
 def solve_nqueens(board, col):
     """
     Solve the N queens problem using backtracking.
+
+    Args:
+        board (list): The current state of the chessboard.
+        col (int): The current column index to place a queen.
+
+    Returns:
+        bool: True if a solution is found, False otherwise.
     """
-    if col >= board_size:
+    if col >= len(board):
         print_solution(board)
         return True
 
-    for row in range(board_size):
+    for row in range(len(board)):
         if is_safe(board, row, col):
             board[row][col] = 1
 
@@ -51,10 +64,13 @@ def solve_nqueens(board, col):
 def print_solution(board):
     """
     Print a solution in the specified format.
+
+    Args:
+        board (list): The current state of the chessboard.
     """
     solution = []
-    for row in range(board_size):
-        for col in range(board_size):
+    for row in range(len(board)):
+        for col in range(len(board)):
             if board[row][col] == 1:
                 solution.append([row, col])
 
@@ -64,6 +80,14 @@ def print_solution(board):
 def nqueens(board_size):
     """
     Solve the N queens problem for a given board size.
+
+    Args:
+        board_size (int): The size of the chessboard.
+
+    Errors raised:
+        ValueError: If the board size is not an integer.
+        SystemExit: If the board size is less than 4.
+
     """
     if not isinstance(board_size, int):
         print("Board size must be a number")
@@ -88,4 +112,3 @@ if __name__ == "__main__":
     except ValueError:
         print("Board size must be a number")
         sys.exit(1)
-
