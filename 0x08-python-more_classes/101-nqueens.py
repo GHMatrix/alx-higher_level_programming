@@ -1,3 +1,8 @@
+#!/usr/bin/python3
+"""
+Solving the N-queens puzzle.
+"""
+
 import sys
 
 
