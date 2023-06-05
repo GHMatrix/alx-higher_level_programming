@@ -159,3 +159,38 @@ class Rectangle:
             Rectangle: The created square.
         """
         return cls(size, size)
+
+    def __str__(self):
+        """
+        Returns the string representation of the Rectangle.
+
+        Represents the Rectangle with the print_symbol character.
+
+        Returns:
+            str: The string representation of the Rectangle.
+        """
+        if self.__width == 0 or self.__height == 0:
+            return ""
+
+        rect = []
+        for _ in range(self.__height):
+            rect.extend([str(self.print_symbol)] * self.__width)
+            if _ != self.__height - 1:
+                rect.append("\n")
+        return "".join(rect)
+
+    def __repr__(self):
+        """
+        Returns the string representation of the Rectangle.
+
+        Returns:
+            str: The string representation of the Rectangle.
+        """
+        return f"Rectangle({self.__width}, {self.__height})"
+
+    def __del__(self):
+        """
+        Prints a message when a Rectangle instance is deleted.
+        """
+        type(self).number_of_instances -= 1
+        print("Bye rectangle...")
