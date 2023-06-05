@@ -14,11 +14,11 @@ class Rectangle:
 
     def __init__(self, width=0, height=0):
         """
-        Initialize a Rectangle instance.
+        Initializing a Rectangle instance.
 
         Args:
-        width: width of the rectangle. Default is 0.
-        height: height of the rectangle. Default is 0.
+            width:  width of the rectangle. Default is 0.
+            height: height of the rectangle. Default is 0.
         """
         self.width = width
         self.height = height
@@ -44,11 +44,11 @@ class Rectangle:
         Set the width of the rectangle.
 
         Args:
-        value: The width value to set.
+            value (int): The width value to set.
 
-        Errors raised:
-        TypeError: If the width is not an integer.
-        ValueError: If the width is less than 0.
+        Error raised:
+            TypeError: If the width is not an integer.
+            ValueError: If the width is less than 0.
         """
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
@@ -69,11 +69,11 @@ class Rectangle:
         Set the height of the rectangle.
 
         Args:
-        value: The height value to set.
+            value: height value to set.
 
-        Errors raised:
-        TypeError: If the height is not an integer.
-        ValueError: If the height is less than 0.
+        Error raised:
+            TypeError: If the height is not an integer.
+            ValueError: If the height is less than 0.
         """
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
@@ -83,19 +83,19 @@ class Rectangle:
 
     def area(self):
         """
-        Determine area of the rectangle.
+        Determine  area of the rectangle.
 
         Returns:
-        int: The area of the rectangle.
+            int: The area of the rectangle.
         """
         return self.width * self.height
 
     def perimeter(self):
         """
-        Determine the perimeter of the rectangle.
+        Determine  perimeter of the rectangle.
 
         Returns:
-        - int: The perimeter of the rectangle.
+            int: The perimeter of the rectangle.
         """
         return 2 * (self.width + self.height)
 
@@ -104,7 +104,7 @@ class Rectangle:
         Return a string representation of the rectangle.
 
         Returns:
-        str: The string representation of the rectangle.
+            str: The string representation of the rectangle.
         """
         if self.width == 0 or self.height == 0:
             return ""
@@ -117,19 +117,45 @@ class Rectangle:
         Return a string representation of the rectangle object.
 
         Returns:
-        - str: The string representation of the rectangle object.
+            str: The string representation of the rectangle object.
         """
         return f"Rectangle({self.width}, {self.height})"
 
+    @staticmethod
+    def bigger_or_equal(rect_1, rect_2):
+        """
+        Return the rectangle with the greater area.
+
+        Args:
+            rect_1 (Rectangle): The first rectangle.
+            rect_2 (Rectangle): The second rectangle.
+
+        Raises:
+            TypeError: If rect_1 is not an instance of Rectangle.
+            TypeError: If rect_2 is not an instance of Rectangle.
+
+        Returns:
+            Rectangle: The rectangle with the greater area.
+        """
+        if not isinstance(rect_1, Rectangle):
+            raise TypeError("rect_1 must be an instance of Rectangle")
+        if not isinstance(rect_2, Rectangle):
+            raise TypeError("rect_2 must be an instance of Rectangle")
+
+        if rect_1.area() >= rect_2.area():
+            return rect_1
+        else:
+            return rect_2
+
     @classmethod
-    def square(cls, size):
+    def square(cls, size=0):
         """
         Create a square with equal width and height.
 
         Args:
-        size: size of the square.
+            size (int): The size of the square. Default is 0.
 
         Returns:
-        Rectangle: The created square.
+            Rectangle: The created square.
         """
         return cls(size, size)
