@@ -1,0 +1,62 @@
+"add_integer" function
+==========================
+
+Module deifnes an addition function for two integers
+def add_integer(a, b=98)
+
+When using add_integer in different scenarios
+---------------------------------------------
+
+The function thus returns the value of addition of two integers 
+using the "+" operator
+
+To import the function from the module
+	>>> add_integer = __import__("0-add_integer").add_integer
+
+For test additon of two numbers:
+	>>> add_integer(5, 10)
+	15
+
+For test addition of two floats:
+	>>> add_integer(3.5, 2.5)
+	6
+
+For test addtion of one int and one float:
+	>>> add_integer(7, 2.8)
+	9
+
+For test addition of negative integers:
+	>>> add_intger(-10, -5)
+	-15
+
+For test addition with 0:
+	>>> add_intger(0, 10)
+	10
+
+For test with only one number:
+	>>> add_integer(5)
+	Traceback (most recent call last):
+	...
+	TypeError: add_integer() missing 1 required positional argument: 'b'
+
+For test with non-numeric input:
+	>>> add_integer('hello', 5)
+	Traceback (most recent call last):
+	...
+	TypeError: a must be an integer or float
+
+For test with both non-numeric input:
+	>>> add_integer('hello', 'world)
+	Traceback (most recent call last)
+	...
+	TypeError: a must be an integer of float
+
+For test with large numbers:
+	>>> add_integer(1000000000, 2000000000)
+	3000000000
+
+For test with boolean:
+	>>> add_integer(True, 5)
+	Traceback (most recent call last)
+	...
+	TypeError: a must be an integer or float
