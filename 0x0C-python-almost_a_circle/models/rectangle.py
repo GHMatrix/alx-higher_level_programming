@@ -25,17 +25,13 @@ class Rectangle(Base):
         Args:
             width (int): The width of the rectangle.
             height (int): The height of the rectangle.
-            x (int, optional): The x-coordinate of the
-            rectangle's position. Defaults to 0.
-            y (int, optional): The y-coordinate of the
-            rectangle's position. Defaults to 0.
-            id (int, optional): The unique identifier of
-            the rectangle. Defaults to None.
+            x (int, optional): The x-coordinate of the rectangle's position. Defaults to 0.
+            y (int, optional): The y-coordinate of the rectangle's position. Defaults to 0.
+            id (int, optional): The unique identifier of the rectangle. Defaults to None.
 
-        Errors raised:
+        Raises:
             TypeError: If the width, height, x, or y is not an integer.
-            ValueError: If the width or height is less
-            than or equal to 0, or if x or y is less than 0.
+            ValueError: If the width or height is less than or equal to 0, or if x or y is less than 0.
         """
         super().__init__(id)
         self.__width = None
@@ -65,7 +61,7 @@ class Rectangle(Base):
         Args:
             value (int): The width of the rectangle.
 
-        Errors raised:
+        Raises:
             TypeError: If the input is not an integer.
             ValueError: If the width is less than or equal to 0.
         """
@@ -93,7 +89,7 @@ class Rectangle(Base):
         Args:
             value (int): The height of the rectangle.
 
-        Errors raised:
+        Raises:
             TypeError: If the input is not an integer.
             ValueError: If the height is less than or equal to 0.
         """
@@ -121,7 +117,7 @@ class Rectangle(Base):
         Args:
             value (int): The x-coordinate of the rectangle's position.
 
-        Errors raised:
+        Raises:
             TypeError: If the input is not an integer.
             ValueError: If the x-coordinate is less than 0.
         """
@@ -135,6 +131,7 @@ class Rectangle(Base):
     def y(self):
         """
         Gets the y-coordinate of the rectangle's position.
+
         Returns:
             int: The y-coordinate of the rectangle's position.
         """
@@ -157,3 +154,12 @@ class Rectangle(Base):
         if value < 0:
             raise ValueError("y must be >= 0")
         self.__y = value
+
+    def area(self):
+        """
+        Calculates and returns the area value of the Rectangle instance.
+
+        Returns:
+            int: The area value of the Rectangle.
+        """
+        return self.__width * self.__height
