@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Defining a class called Rectangle validate attribute
+Defining a class called Rectangle-area first
 """
 
 
