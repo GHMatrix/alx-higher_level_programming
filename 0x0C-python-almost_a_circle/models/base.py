@@ -64,7 +64,8 @@ class Base:
         """Return the deserialization of a JSON string.
 
         Args:
-            json_string (str): A JSON string representation of a list of dictionaries.
+            json_string (str): A JSON string representation
+            of a list of dictionaries.
 
         Returns:
             list: The deserialized Python list.
@@ -81,7 +82,8 @@ class Base:
             **dictionary (dict): Key/value pairs of attributes to initialize.
 
         Returns:
-            object: An instance of the class with attributes set according to the dictionary.
+            object: An instance of the class with attributes
+            set according to the dictionary.
         """
         if dictionary and dictionary != {}:
             if cls.__name__ == "Rectangle":
@@ -146,7 +148,8 @@ class Base:
                 else:
                     fieldnames = ["id", "size", "x", "y"]
                 reader = csv.DictReader(csvfile, fieldnames=fieldnames)
-                list_dicts = [dict([(k, int(v)) for k, v in dictionary.items()]) for dictionary in reader]
+                list_dicts = [dict([(k, int(v)) for k, v in dictionary.items(
+                    )]) for dictionary in reader]
                 return [cls.create(**dictionary) for dictionary in list_dicts]
         except IOError:
             return []
