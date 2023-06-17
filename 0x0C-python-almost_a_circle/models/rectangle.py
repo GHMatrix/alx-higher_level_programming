@@ -25,13 +25,17 @@ class Rectangle(Base):
         Args:
             width (int): The width of the rectangle.
             height (int): The height of the rectangle.
-            x (int, optional): The x-coordinate of the rectangle's position. Defaults to 0.
-            y (int, optional): The y-coordinate of the rectangle's position. Defaults to 0.
-            id (int, optional): The unique identifier of the rectangle. Defaults to None.
+            x (int, optional): The x-coordinate of the
+            rectangle's position. Defaults to 0.
+            y (int, optional): The y-coordinate of the
+            rectangle's position. Defaults to 0.
+            id (int, optional): The unique identifier
+            of the rectangle. Defaults to None.
 
-        Raises:
+        Errors raised:
             TypeError: If the width, height, x, or y is not an integer.
-            ValueError: If the width or height is less than or equal to 0, or if x or y is less than 0.
+            ValueError: If the width or height is less than
+            or equal to 0, or if x or y is less than 0.
         """
         super().__init__(id)
         self.__width = None
@@ -170,3 +174,13 @@ class Rectangle(Base):
         """
         for _ in range(self.__height):
             print("#" * self.__width)
+
+    def __str__(self):
+        """
+        Returns a string representation of the Rectangle instance.
+
+        Returns:
+            str: The string representation of the Rectangle.
+        """
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(
+            self.id, self.__x, self.__y, self.__width, self.__height)
