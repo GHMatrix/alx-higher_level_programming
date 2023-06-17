@@ -29,8 +29,8 @@ class Rectangle(Base):
             rectangle's position. Defaults to 0.
             y (int, optional): The y-coordinate of the
             rectangle's position. Defaults to 0.
-            id (int, optional): The unique identifier
-            of the rectangle. Defaults to None.
+            id (int, optional): The unique identifier of
+            the rectangle. Defaults to None.
 
         Errors raised:
             TypeError: If the width, height, x, or y is not an integer.
@@ -170,10 +170,13 @@ class Rectangle(Base):
 
     def display(self):
         """
-        Prints the Rectangle instance with the character #.
+        Prints the Rectangle instance with the character
+        #, taking into account x and y.
         """
+        for _ in range(self.__y):
+            print()
         for _ in range(self.__height):
-            print("#" * self.__width)
+            print(" " * self.__x + "#" * self.__width)
 
     def __str__(self):
         """
