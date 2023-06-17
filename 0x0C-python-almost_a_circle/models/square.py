@@ -21,7 +21,7 @@ class Square(Rectangle):
 
     def __init__(self, size, x=0, y=0, id=None):
         """
-        Initializes a Square object.
+        Initializing Square object.
 
         Args:
             size (int): The size of the square.
@@ -29,8 +29,8 @@ class Square(Rectangle):
             square's position. Defaults to 0.
             y (int, optional): The y-coordinate of the
             square's position. Defaults to 0.
-            id (int, optional): The unique identifier of the
-            square. Defaults to None.
+            id (int, optional): The unique identifier
+            of the square. Defaults to None.
         """
         super().__init__(size, size, x, y, id)
 
@@ -68,3 +68,32 @@ class Square(Rectangle):
         """
         return "[Square] ({}) {}/{} - {}".format(
                 self.id, self.x, self.y, self.width)
+
+    def update(self, *args, **kwargs):
+        """
+        Assigns attributes to the instance using the arguments.
+
+        Args:
+            *args: The positional arguments.
+            **kwargs: The keyword arguments representing attribute-value pairs.
+
+        Errors raised:
+            TypeError: If any of the keyword
+            arguments is not a valid attribute.
+        """
+        if args:
+            if len(args) >= 1:
+                self.id = args[0]
+            if len(args) >= 2:
+                self.size = args[1]
+            if len(args) >= 3:
+                self.x = args[2]
+            if len(args) >= 4:
+                self.y = args[3]
+        elif kwargs:
+            for key, value in kwargs.items():
+                if hasattr(self, key):
+                    setattr(self, key, value)
+                else:
+                    raise TypeError(
+                            f"'{key}' is not a valid attribute of Square")
