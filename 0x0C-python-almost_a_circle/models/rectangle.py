@@ -25,13 +25,17 @@ class Rectangle(Base):
         Args:
             width (int): The width of the rectangle.
             height (int): The height of the rectangle.
-            x (int, optional): The x-coordinate of the rectangle's position. Defaults to 0.
-            y (int, optional): The y-coordinate of the rectangle's position. Defaults to 0.
-            id (int, optional): The unique identifier of the rectangle. Defaults to None.
+            x (int, optional): The x-coordinate of the
+            rectangle's position. Defaults to 0.
+            y (int, optional): The y-coordinate of the
+            rectangle's position. Defaults to 0.
+            id (int, optional): The unique
+            identifier of the rectangle. Defaults to None.
 
-        Raises:
+        Error raised:
             TypeError: If the width, height, x, or y is not an integer.
-            ValueError: If the width or height is less than or equal to 0, or if x or y is less than 0.
+            ValueError: If the width or height is less than
+            or equal to 0, or if x or y is less than 0.
         """
         super().__init__(id)
         self.__width = None
@@ -166,7 +170,8 @@ class Rectangle(Base):
 
     def display(self):
         """
-        Prints the Rectangle instance with the character '#', taking into account x and y.
+        Prints the Rectangle instance with the character
+        '#', taking into account x and y.
         """
         for _ in range(self.__y):
             print()
@@ -183,25 +188,33 @@ class Rectangle(Base):
         return "[Rectangle] ({}) {}/{} - {}/{}".format(
             self.id, self.__x, self.__y, self.__width, self.__height)
 
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """
-        Assigns arguments to each attribute of the Rectangle.
+        Assigns key/value arguments to the attributes of the Rectangle.
 
         Args:
-            *args: The arguments to assign to the attributes in the following order:
-                1st argument: id attribute
-                2nd argument: width attribute
-                3rd argument: height attribute
-                4th argument: x attribute
-                5th argument: y attribute
+            *args: The positional arguments.
+            **kwargs: The keyword arguments representing attribute-value pairs.
+
+        Raises:
+            TypeError: If any of the keyword arguments
+            is not a valid attribute.
         """
-        if len(args) >= 1:
-            self.id = args[0]
-        if len(args) >= 2:
-            self.width = args[1]
-        if len(args) >= 3:
-            self.height = args[2]
-        if len(args) >= 4:
-            self.x = args[3]
-        if len(args) >= 5:
-            self.y = args[4]
+        if args:
+            if len(args) >= 1:
+                self.id = args[0]
+            if len(args) >= 2:
+                self.width = args[1]
+            if len(args) >= 3:
+                self.height = args[2]
+            if len(args) >= 4:
+                self.x = args[3]
+            if len(args) >= 5:
+                self.y = args[4]
+        elif kwargs:
+            for key, value in kwargs.items():
+                if hasattr(self, key):
+                    setattr(self, key, value)
+                else:
+                    raise TypeError(
+                            f"'{key}' is not a valid attribute of Rectangle")
