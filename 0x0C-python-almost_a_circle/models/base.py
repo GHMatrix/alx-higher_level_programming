@@ -194,3 +194,19 @@ class Base:
             turt.hideturtle()
 
         turtle.exitonclick()
+
+    @classmethod
+    def save_to_file(cls, list_objs):
+        """Write the JSON string representation of list_objs to a file.
+
+        Args:
+            list_objs (list): A list of instances inheriting from Base.
+        """
+        filename = cls.__name__ + ".json"
+        with open(filename, "w") as jsonfile:
+            if list_objs is None:
+                jsonfile.write("[]")
+            else:
+                list_dicts = [obj.to_dictionary() for obj in list_objs]
+                json_string = cls.to_json_string(list_dicts)
+                jsonfile.write(json_string)
