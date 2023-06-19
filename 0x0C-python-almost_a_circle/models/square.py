@@ -67,7 +67,7 @@ class Square(Rectangle):
             str: The string representation of the Square.
         """
         return "[Square] ({}) {}/{} - {}".format(
-                self.id, self.x, self.y, self.width)
+            self.id, self.x, self.y, self.width)
 
     def update(self, *args, **kwargs):
         """
@@ -96,4 +96,18 @@ class Square(Rectangle):
                     setattr(self, key, value)
                 else:
                     raise TypeError(
-                            f"'{key}' is not a valid attribute of Square")
+                        f"'{key}' is not a valid attribute of Square")
+
+    def to_dictionary(self):
+        """
+        Returns the dictionary representation of a Square.
+
+        Returns:
+            dict: The dictionary representation of the Square.
+        """
+        return {
+            "id": self.id,
+            "size": self.size,
+            "x": self.x,
+            "y": self.y
+        }
