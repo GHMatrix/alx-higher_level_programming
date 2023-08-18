@@ -1,31 +1,20 @@
 #!/usr/bin/python3
-"""
-This script connects to a MySQL database and retrieves
-a list of states from the 'states' table.
-The results are sorted in ascending order by states.id and displayed as tuples.
-
-Usage: ./0-select_states.py <mysql_username> <mysql_password> <database_name>
-"""
+"""List all states from the database hbtn_0e_0_usa"""
 
 import MySQLdb
 import sys
 
-
-def main():
-    """
-    Main function that connects to the MySQL server
-    and retrieves and displays state data.
-    """
-    # Check for correct usage
+if __name__ == "__main__":
+    # Get MySQL connection parameters from command line arguments
     if len(sys.argv) != 4:
-        print("Usage: ./0-select_states.py
-              < mysql_username > < mysql_password > < database_name >")
-        return
+        print("Usage: {} username password database".format(sys.argv[0]))
+        sys.exit(1)
 
     username = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
 
+    # Connect to MySQL server running on localhost at port 3306
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -34,19 +23,19 @@ def main():
         db=database
     )
 
+    # Create a cursor object
     cursor = db.cursor()
 
-    query = "SELECT * FROM states ORDER BY id"
-    cursor.execute(query)
+    # Execute the query to select and display states
+    cursor.execute("SELECT * FROM states ORDER BY id ASC")
 
+    # Fetch all rows
     rows = cursor.fetchall()
 
+    # Display results
     for row in rows:
         print(row)
 
+    # Close the cursor and connection
     cursor.close()
     db.close()
-
-
-if __name__ == "__main__":
-    main()
