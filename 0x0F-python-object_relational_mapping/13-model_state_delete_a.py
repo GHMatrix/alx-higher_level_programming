@@ -20,8 +20,11 @@ def delete_states_with_a(username, password, database):
     Session = sessionmaker(bind=engine)
 
     with Session() as session:
-        states_with_a = session.query(State)
-        .filter(State.name.like('%a%')).all()
+        states_with_a = (
+                session.query(State)
+                .filter(State.name.like('%a%'))
+                .all()
+        )
         for state in states_with_a:
             session.delete(state)
         session.commit()
