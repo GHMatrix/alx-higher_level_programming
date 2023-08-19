@@ -39,9 +39,10 @@ if __name__ == "__main__":
     # Fetch all rows
     rows = cursor.fetchall()
 
-    # Display results
-    for row in rows:
-        print(row[0])
+    # Check if any cities were found
+    if rows:
+        city_names = [row[0] for row in rows]
+        print(", ".join(city_names))
 
     # Close the cursor and connection
     cursor.close()
