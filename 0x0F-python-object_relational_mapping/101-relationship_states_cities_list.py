@@ -24,7 +24,7 @@ def list_states_and_cities(username, password, database):
     for state in states_and_cities:
         print("{}: {}".format(state.id, state.name))
         for city in state.cities:
-            print("    {}: {}".format(city.id, city.name))
+            print("\t{}: {}".format(city.id, city.name))
 
     session.close()
 
