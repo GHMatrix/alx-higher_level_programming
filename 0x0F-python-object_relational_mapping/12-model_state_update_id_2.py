@@ -9,17 +9,21 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
 
+
 def update_state_name(username, password, database):
     """Updates the state name"""
-    connection_url = f"mysql+mysqldb://{username}:{password}@localhost/{database}"
+    connection_url = (
+            f"mysql+mysqldb://{username}:{password}@localhost/{database}"
+    )
     engine = create_engine(connection_url)
     Session = sessionmaker(bind=engine)
-    
+
     with Session() as session:
         state = session.query(State).filter_by(id=2).first()
         if state:
             state.name = "New Mexico"
             session.commit()
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
