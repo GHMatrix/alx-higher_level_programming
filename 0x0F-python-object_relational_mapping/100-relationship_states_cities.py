@@ -1,35 +1,35 @@
 #!/usr/bin/python3
 
-""" Prints the State object with the name passed as argument
-from the database hbtn_0e_6_usa """
+"""
+Script to create the State "California" with the City "San Francisco"
+"""
 
 from sys import argv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import Base, State
+from relationship_state import Base, State, City
 
+if __name__ == "__main__":
+    if len(argv) != 4:
+        print("Usage: {} username password database".format(argv[0]))
+        exit(1)
 
-def find_state_id_by_name(username, password, database, state_name):
-    """ Find and print the State's id by its name """
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
-                           .format(username, password, database))
+    username, password, database = argv[1], argv[2], argv[3]
+
+    # Connect to the MySQL server running on localhost at port 3306
+    engine = create_engine(
+        f'mysql+mysqldb://{username}:{password}@localhost/{database}',
+        pool_pre_ping=True
+    )
 
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    state = session.query(State).filter(State.name == state_name).first()
-    if state is not None:
-        print("{}".format(state.id))
-    else:
-        print("Not found")
+    new_state = State(name="California")
+    new_city = City(name="San Francisco")
+    new_state.cities.append(new_city)
+
+    session.add(new_state)
+    session.commit()
 
     session.close()
-
-
-if __name__ == "__main__":
-    if len(argv) != 5:
-        print("Usage: {} username password database state_name"
-              .format(argv[0]))
-        exit(1)
-
-    find_state_id_by_name(argv[1], argv[2], argv[3], argv[4])
