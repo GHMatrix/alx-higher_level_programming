@@ -14,8 +14,7 @@ if __name__ == "__main__":
         exit(1)
 
     username, password, database = argv[1], argv[2], argv[3]
-    connection_url =
-    f"mysql+mysqldb://{username}:{password}@localhost/{database}"
+    connection_url = f"mysql+mysqldb://{username}:{password}@localhost/{database}"
     engine = create_engine(connection_url)
     Session = sessionmaker(bind=engine)
 
