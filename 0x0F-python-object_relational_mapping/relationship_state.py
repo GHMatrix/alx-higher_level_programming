@@ -1,46 +1,42 @@
-#!/usr/bin/python3
-
 """
-Module to define the State class with relationships
+This module defines SQLAlchemy ORM classes for the states and cities tables.
 """
 
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-# Create a base class for declarative models
 Base = declarative_base()
 
 
 class State(Base):
     """
-    State class representing the 'states' table
+    Represents a state in the states table.
+
+    Attributes:
+        id (int): Primary key ID of the state.
+        name (str): Name of the state.
+        cities (relationship): One-to-many relationship with City objects.
     """
     __tablename__ = 'states'
 
-    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
-    name = Column(String(128), nullable=False)
-    cities = relationship(
-        "City",
-        cascade="all, delete-orphan",
-        backref="state"
-    )
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(256), nullable=False)
+
+    cities = relationship("City", backref="state", order_by="City.id")
 
 
-if __name__ == "__main__":
-    import sys
-    from sqlalchemy import create_engine
+class City(Base):
+    """
+    Represents a city in the cities table.
 
-    if len(sys.argv) != 4:
-        print("Usage: {} username password database".format(sys.argv[0]))
-        sys.exit(1)
+    Attributes:
+        id (int): Primary key ID of the city.
+        state_id (int): Foreign key ID referencing the parent State.
+        name (str): Name of the city.
+    """
+    __tablename__ = 'cities'
 
-    username, password, database = sys.argv[1], sys.argv[2], sys.argv[3]
-
-    # Connect to the MySQL server running on localhost at port 3306
-    engine = create_engine(
-            f'mysql+mysqldb://{username}:{password}@localhost/{database}',
-            pool_pre_ping=True)
-
-    # Create the 'states' table
-    Base.metadata.create_all(engine)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    state_id = Column(Integer, ForeignKey('states.id'), nullable=False)
+    name = Column(String(256), nullable=False)
