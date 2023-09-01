@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
 This script sends a POST request to a given URL with
-an email parameter and displays the body of the response.
+an email parameter and displays
+the body of the response (decoded in utf-8).
 
 Usage: ./6-post_email.py <URL> <email>
 """
@@ -24,7 +25,6 @@ def post_email(url, email):
         response = requests.post(url, data=data)
         response.raise_for_status()  # Raise an exception for HTTP errors
 
-        print(f"Your email is: {email}")
         print(response.text)
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
