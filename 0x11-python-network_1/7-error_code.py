@@ -1,32 +1,30 @@
 #!/usr/bin/python3
 """
 This script sends a request to a given URL and
-displays the body of the response (decoded in utf-8).
-It also handles HTTP errors and prints the
-HTTP status code in case of an error.
-
-Usage: ./7-error_code.py <URL>
+displays the body of the response.
+If the HTTP status code is greater than or equal to 400,
+it prints an error code followed by the value of the HTTP status code.
 """
 
-import urllib.request
-import urllib.error
+import requests
 import sys
 
 
 def fetch_url_content(url):
     """
-    Sends a request to the provided URL and displays the body of the response
-    (decoded in utf-8). Handles HTTP errors and prints the
-    HTTP status code in case of an error.
+    Sends a request to the provided URL and displays the body of the response.
+    If the HTTP status code is greater than or equal to 400,
+    it prints an error code followed by the value of the HTTP status code.
 
     :param url: The URL to send the request to.
     """
     try:
-        with urllib.request.urlopen(url) as response:
-            content = response.read().decode('utf-8')
-            print(content)
-    except urllib.error.HTTPError as e:
-        print(f"Error code: {e.code}")
+        response = requests.get(url)
+        response.raise_for_status()
+        content = response.text
+        print(content)
+    except requests.exceptions.HTTPError as e:
+        print(f"Error code: {e.response.status_code}")
     except Exception as e:
         print(e)
 
