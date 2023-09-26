@@ -11,7 +11,7 @@ request.get(apiUrl, (error, response, body) => {
   } else {
     try {
       const movieData = JSON.parse(body);
-      console.log(`Title: ${movieData.title}`);
+      console.log(movieData.title);
     } catch (parseError) {
       console.error(parseError);
     }
