@@ -29,8 +29,12 @@ request.get(apiUrl, (error, response, body) => {
         }
       }
 
-      // Print the result in the desired format
-      console.log(JSON.stringify(completedTasksByUser, null, 2));
+      // Print the result in the desired format with single quotes
+      const formattedResult = {};
+      for (const userId in completedTasksByUser) {
+        formattedResult[userId] = completedTasksByUser[userId];
+      }
+      console.log(JSON.stringify(formattedResult, null, 2).replace(/"/g, "'"));
     } catch (parseError) {
       console.error(parseError);
       process.exit(1);
