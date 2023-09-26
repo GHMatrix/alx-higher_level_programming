@@ -19,7 +19,7 @@ request.get(apiUrl, (error, response, body) => {
       const wedgeAntillesFilms = filmData.results.filter((film) =>
         film.characters.includes('https://swapi-api.alx-tools.com/api/people/18/')
       );
-      console.log(wedgeAntillesFilms.length.toString()); // Ensure the output is a string
+      console.log(wedgeAntillesFilms.length.toString() + "\n"); // Ensure a newline character is added
     } catch (parseError) {
       console.error(parseError);
       process.exit(1);
