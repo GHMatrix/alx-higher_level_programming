@@ -4,9 +4,15 @@ const request = require('request');
 
 const apiUrl = process.argv[2];
 
+if (!apiUrl) {
+  console.error('Usage: ./4-starwars_count.js <API URL>');
+  process.exit(1);
+}
+
 request.get(apiUrl, (error, response, body) => {
   if (error) {
     console.error(error);
+    process.exit(1);
   } else {
     try {
       const filmData = JSON.parse(body);
@@ -16,6 +22,7 @@ request.get(apiUrl, (error, response, body) => {
       console.log(wedgeAntillesFilms.length);
     } catch (parseError) {
       console.error(parseError);
+      process.exit(1);
     }
   }
 });
